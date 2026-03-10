@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Creative Training — ECMG Creative Studios</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A55A;
+  --black: #0D0D0D;
+  --panel: #141414;
+  --panel-border: #1E1E1E;
+  --white: #FFFFFF;
+  --off-white: #E8E8E8;
+  --gray: #777777;
+  --gray-mid: #AAAAAA;
+  --font-d: 'Oswald', sans-serif;
+  --font-b: 'Montserrat', sans-serif;
+  --panel-w: 158px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:var(--font-b);overflow-x:hidden;}
+
+/* ── LEFT PANEL ── */
+.side-panel{
+  position:fixed;left:0;top:0;bottom:0;width:var(--panel-w);
+  background:var(--panel);border-right:1px solid var(--panel-border);
+  z-index:200;display:flex;flex-direction:column;
+  align-items:center;justify-content:space-between;padding:28px 0 32px;
+}
+.brand-mark{
+  font-family:var(--font-d);font-size:1.1rem;font-weight:700;
+  letter-spacing:0.04em;color:var(--white);text-decoration:none;
+  padding:0 18px;
+}
+.brand-mark span{color:var(--gold);}
+.panel-mid{display:flex;flex-direction:column;align-items:center;gap:0;flex:1;justify-content:center;}
+.slide-counter{display:flex;flex-direction:column;align-items:flex-start;padding:0 22px;margin-bottom:24px;}
+.slide-num{font-family:var(--font-d);font-size:3.6rem;font-weight:700;color:var(--gold);line-height:1;letter-spacing:-0.02em;}
+.slide-total{font-family:var(--font-d);font-size:0.7rem;color:var(--gray);letter-spacing:0.1em;}
+.panel-divider{width:1px;height:60px;background:var(--panel-border);margin:12px 0;}
+.panel-label{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:var(--font-d);font-size:0.58rem;letter-spacing:0.24em;
+  text-transform:uppercase;color:var(--gray);white-space:nowrap;
+}
+.panel-socials{display:flex;flex-direction:column;align-items:center;gap:22px;}
+.panel-socials a{color:var(--white);opacity:0.5;text-decoration:none;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;}
+.panel-socials a:hover{opacity:1;}
+.icon-svg{width:18px;height:18px;fill:none;stroke:var(--white);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ── TOP NAV ── */
+.top-nav{
+  position:fixed;top:0;left:var(--panel-w);right:0;height:60px;
+  z-index:199;display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;background:rgba(13,13,13,0.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.nav-phone{font-family:var(--font-d);font-size:0.78rem;letter-spacing:0.14em;color:var(--gray-mid);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-family:var(--font-d);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-enroll{
+  font-family:var(--font-d);font-size:0.68rem;font-weight:600;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,165,90,0.4);
+  padding:7px 18px;transition:all 0.3s;background:none;cursor:pointer;
+}
+.nav-enroll:hover{background:var(--gold);color:var(--black);}
+
+/* ── SITE BODY ── */
+.site-body{margin-left:var(--panel-w);}
+
+/* ── SLIDES ── */
+.slide{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;}
+.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0;}
+.slide-bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.55);}
+.slide-bg.dark::after{background:linear-gradient(135deg,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.42) 100%);}
+.slide-content{position:relative;z-index:2;width:100%;padding:100px 6% 80px;}
+
+/* ── HERO ── */
+.hero-slide .slide-bg{
+  background-image:
+    linear-gradient(135deg,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.35) 100%),
+    url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80&fit=crop');
+}
+.hero-content{max-width:780px;margin-left:auto;text-align:right;}
+.slide-eyebrow{
+  font-family:var(--font-d);font-size:0.65rem;letter-spacing:0.32em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:20px;
+  display:flex;align-items:center;justify-content:flex-end;gap:12px;
+}
+.slide-eyebrow::before{content:'';width:36px;height:1px;background:var(--gold);opacity:0.5;}
+.hero-title{
+  font-family:var(--font-d);font-size:clamp(3.2rem,7vw,6rem);font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;line-height:1.0;margin-bottom:26px;
+}
+.hero-title em{font-style:normal;color:var(--gold);}
+.hero-sub{
+  font-size:0.95rem;font-weight:300;color:var(--off-white);line-height:1.8;
+  max-width:520px;margin:0 0 40px auto;
+}
+.pill-btn{
+  display:inline-flex;align-items:center;gap:12px;font-family:var(--font-d);
+  font-size:0.78rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  background:var(--gold);color:var(--black);padding:15px 34px;border-radius:40px;
+  border:none;cursor:pointer;text-decoration:none;transition:all 0.3s;position:relative;overflow:hidden;
+}
+.pill-btn::before{
+  content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);
+  transform:translateX(-100%);transition:transform 0.4s ease;border-radius:40px;
+}
+.pill-btn:hover::before{transform:translateX(0);}
+.pill-btn:hover{box-shadow:0 12px 36px rgba(201,165,90,0.35);transform:translateY(-2px);}
+.pill-arrow{display:inline-block;transition:transform 0.2s;}
+.pill-btn:hover .pill-arrow{transform:translateX(4px);}
+.urgency-strip{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(201,165,90,0.08);border-top:1px solid rgba(201,165,90,0.18);
+  padding:14px 6%;display:flex;align-items:center;justify-content:flex-end;gap:32px;z-index:2;
+}
+.urgency-item{
+  font-family:var(--font-d);font-size:0.65rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gray-mid);display:flex;align-items:center;gap:8px;
+}
+.urgency-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.slide-nav{position:absolute;bottom:48px;left:6%;display:flex;gap:28px;z-index:3;}
+.slide-nav-btn{
+  font-family:var(--font-d);font-size:0.68rem;font-weight:600;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--gray);background:none;border:none;cursor:pointer;
+  text-decoration:none;transition:color 0.2s;
+}
+.slide-nav-btn:hover{color:var(--white);}
+
+/* ── SECTION SHARED ── */
+.section-tag{
+  font-family:var(--font-d);font-size:0.62rem;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+  display:flex;align-items:center;gap:14px;
+}
+.section-tag::before{content:'';width:30px;height:1px;background:var(--gold);opacity:0.5;}
+.section-hed{margin-bottom:56px;}
+.section-hed h2{
+  font-family:var(--font-d);font-size:clamp(2rem,4.5vw,3.6rem);font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;line-height:1.05;
+}
+.section-hed h2 span{color:var(--gold);}
+
+/* ── WHAT SLIDE ── */
+.what-slide{background:#111111;align-items:flex-start;}
+.what-slide .slide-content{padding:80px 6%;}
+.what-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#1A1A1A;}
+.what-card{
+  background:#0E0E0E;padding:44px 32px;border-top:2px solid transparent;
+  transition:border-color 0.3s,background 0.3s;
+}
+.what-card:hover{border-top-color:var(--gold);background:#141414;}
+.what-num{font-family:var(--font-d);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);opacity:0.5;margin-bottom:20px;}
+.what-card h3{font-family:var(--font-d);font-size:1.05rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;}
+.what-card p{font-size:0.82rem;color:var(--gray-mid);line-height:1.8;}
+
+/* ── PRODUCT SLIDE ── */
+.product-slide{background:#0A0A0A;min-height:90vh;}
+.product-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:center;padding:80px 6%;
+}
+.product-img-wrap{position:relative;}
+.product-img-frame{
+  width:100%;aspect-ratio:3/4;background:#1A1A1A;border:1px solid #2A2A2A;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;
+}
+.product-img-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.product-placeholder-msg{
+  font-family:var(--font-d);font-size:0.7rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gray);text-align:center;padding:20px;
+}
+.product-corner{position:absolute;width:28px;height:28px;border-color:var(--gold);border-style:solid;opacity:0.5;}
+.product-corner.tl{top:-8px;left:-8px;border-width:2px 0 0 2px;}
+.product-corner.br{bottom:-8px;right:-8px;border-width:0 2px 2px 0;}
+.product-text h2{
+  font-family:var(--font-d);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;line-height:1.08;margin-bottom:22px;
+}
+.product-text h2 span{color:var(--gold);}
+.product-text > p{font-size:0.88rem;color:var(--gray-mid);line-height:1.85;margin-bottom:32px;}
+.product-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;}
+.product-pill{font-family:var(--font-d);font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--white);border:1px solid rgba(255,255,255,0.15);padding:6px 14px;}
+
+/* ── VALUE SLIDE ── */
+.value-slide{background:#0D0D0D;min-height:100vh;align-items:flex-start;}
+.value-slide .slide-content{
+  display:grid;grid-template-columns:1fr 440px;gap:80px;
+  align-items:start;padding:80px 6%;
+}
+.value-rows{margin-top:40px;}
+.value-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:18px 0;border-bottom:1px solid #1C1C1C;gap:20px;
+}
+.value-row:first-child{border-top:1px solid #1C1C1C;}
+.vr-name{font-family:var(--font-d);font-size:0.88rem;letter-spacing:0.06em;text-transform:uppercase;}
+.vr-val{font-family:var(--font-d);font-size:0.82rem;color:var(--gray);text-decoration:line-through;white-space:nowrap;}
+.value-total-block{
+  background:rgba(201,165,90,0.07);border:1px solid rgba(201,165,90,0.2);
+  padding:28px 30px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;
+}
+.vt-label{font-family:var(--font-d);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);}
+.vt-amount{font-family:var(--font-d);font-size:1.8rem;font-weight:700;color:var(--gold);}
+.value-cta-card{
+  background:#141414;border:1px solid #222;border-top:2px solid var(--gold);
+  padding:44px 38px;position:sticky;top:100px;
+}
+.cta-card-eyebrow{font-family:var(--font-d);font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.value-cta-card h3{font-family:var(--font-d);font-size:1.4rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:18px;line-height:1.15;}
+.value-cta-card > p{font-size:0.82rem;color:var(--gray-mid);line-height:1.75;margin-bottom:28px;}
+.value-cta-card .pill-btn{width:100%;justify-content:center;}
+.cta-card-note{font-size:0.72rem;color:var(--gray);text-align:center;margin-top:14px;letter-spacing:0.02em;line-height:1.6;}
+.ends-badge{
+  display:inline-flex;align-items:center;gap:7px;font-family:var(--font-d);
+  font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold);background:rgba(201,165,90,0.1);border:1px solid rgba(201,165,90,0.25);
+  padding:6px 14px;margin-bottom:24px;
+}
+
+/* ── TESTIMONIALS ── */
+.testimonials-slide{background:#0F0F0F;min-height:90vh;align-items:flex-start;}
+.testimonials-slide .slide-content{padding:80px 6%;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#1A1A1A;margin-top:48px;}
+.testi-card{background:#0E0E0E;padding:40px 34px;transition:background 0.25s;display:flex;flex-direction:column;gap:20px;}
+.testi-card:hover{background:#141414;}
+.testi-top{display:flex;align-items:center;gap:16px;}
+.testi-avatar{
+  width:54px;height:54px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:1px solid #2A2A2A;background:#1A1A1A;
+}
+.testi-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.testi-name{font-family:var(--font-d);font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;}
+.testi-role{font-size:0.7rem;color:var(--gray);margin-top:2px;letter-spacing:0.04em;}
+.testi-stars{color:var(--gold);font-size:0.65rem;letter-spacing:2px;margin-top:3px;}
+.testi-quote{
+  font-size:0.86rem;color:var(--gray-mid);line-height:1.85;font-style:italic;
+  flex:1;position:relative;padding-top:18px;
+}
+.testi-quote::before{
+  content:'"';position:absolute;top:0;left:0;font-family:var(--font-d);
+  font-size:3rem;color:var(--gold);opacity:0.15;line-height:1;pointer-events:none;
+}
+
+/* ── BOTTOM CTA SLIDE ── */
+.cta-slide{min-height:70vh;position:relative;display:flex;align-items:center;}
+.cta-slide .slide-bg{
+  background-image:
+    linear-gradient(135deg,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.5) 100%),
+    url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1600&q=80&fit=crop');
+}
+.cta-inner{max-width:700px;margin-left:auto;text-align:right;position:relative;z-index:2;padding:0 6%;}
+.cta-inner h2{
+  font-family:var(--font-d);font-size:clamp(2.4rem,5.5vw,4.4rem);font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;line-height:1.08;margin-bottom:22px;
+}
+.cta-inner h2 span{color:var(--gold);}
+.cta-inner p{font-size:0.92rem;color:var(--off-white);font-weight:300;line-height:1.8;margin-bottom:36px;}
+
+/* ── FOOTER ── */
+.site-footer{
+  background:var(--panel);border-top:1px solid #1E1E1E;
+  padding:28px 6%;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:14px;
+}
+.footer-copy{font-size:0.7rem;color:var(--gray);letter-spacing:0.04em;}
+.footer-link{font-family:var(--font-d);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;opacity:0.7;transition:opacity 0.2s;}
+.footer-link:hover{opacity:1;}
+
+/* ── MODAL ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,0.9);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+  padding:20px 20px 20px calc(var(--panel-w) + 20px);
+}
+.modal-overlay.active{display:flex;}
+.modal{
+  background:#141414;border:1px solid #272727;border-top:2px solid var(--gold);
+  max-width:520px;width:100%;position:relative;
+  animation:modalIn 0.38s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(22px) scale(0.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.modal-body{padding:48px 46px 42px;}
+.modal-close{position:absolute;top:18px;right:22px;background:none;border:none;color:var(--gray);font-size:1.1rem;cursor:pointer;transition:color 0.2s;}
+.modal-close:hover{color:var(--white);}
+.modal-step{display:none;}
+.modal-step.active{display:block;}
+.modal-eyebrow{font-family:var(--font-d);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.modal h3{font-family:var(--font-d);font-size:1.4rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:18px;line-height:1.2;}
+.modal > .modal-body > .modal-step > p,
+.modal-step p{font-size:0.84rem;color:var(--gray-mid);line-height:1.75;margin-bottom:16px;}
+.check-block{
+  background:#0D0D0D;border:1px solid #252525;padding:20px 22px;
+  margin:22px 0;display:flex;align-items:flex-start;gap:14px;
+  cursor:pointer;transition:border-color 0.2s;
+}
+.check-block:hover{border-color:rgba(201,165,90,0.3);}
+.check-block input[type="checkbox"]{width:18px;height:18px;min-width:18px;accent-color:var(--gold);margin-top:2px;cursor:pointer;}
+.check-block label{font-size:0.82rem;color:var(--gray-mid);line-height:1.7;cursor:pointer;}
+.check-block label strong{color:var(--white);}
+.modal-pill{
+  width:100%;font-family:var(--font-d);font-size:0.78rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;background:var(--gold);color:var(--black);
+  padding:16px;border:none;border-radius:40px;cursor:pointer;transition:all 0.3s;
+  opacity:0.35;pointer-events:none;
+}
+.modal-pill.on{opacity:1;pointer-events:all;}
+.modal-pill.on:hover{background:#ddb96a;transform:translateY(-1px);box-shadow:0 10px 30px rgba(201,165,90,0.25);}
+.code-box{background:#0A0A0A;border:1px solid rgba(201,165,90,0.3);padding:30px 26px;text-align:center;margin:24px 0;}
+.code-box-label{font-family:var(--font-d);font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
+.code-display{font-family:var(--font-d);font-size:2.6rem;font-weight:700;letter-spacing:0.2em;color:var(--gold);}
+.code-hint{font-size:0.78rem;color:var(--gray-mid);margin-top:10px;line-height:1.6;}
+.code-ends{font-family:var(--font-d);font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-top:6px;}
+.kofi-pill{
+  display:block;width:100%;font-family:var(--font-d);font-size:0.78rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;background:var(--gold);color:var(--black);
+  padding:16px;border:none;border-radius:40px;cursor:pointer;transition:all 0.3s;
+  text-decoration:none;text-align:center;
+}
+.kofi-pill:hover{background:#ddb96a;transform:translateY(-1px);}
+.modal-sub{font-size:0.72rem;color:var(--gray);text-align:center;margin-top:12px;letter-spacing:0.02em;}
+
+/* ── ANIMATE ── */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+.animate{opacity:0;}
+.animate.in{animation:fadeInUp 0.65s ease forwards;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .what-grid{grid-template-columns:repeat(2,1fr);}
+  .testi-grid{grid-template-columns:repeat(2,1fr);}
+  .value-slide .slide-content{grid-template-columns:1fr;gap:40px;}
+  .product-inner{grid-template-columns:1fr;gap:48px;}
+}
+@media(max-width:768px){
+  :root{--panel-w:0px;}
+  .side-panel{display:none;}
+  .top-nav{left:0;}
+  .nav-links{display:none;}
+  .modal-overlay{padding:20px;}
+  .hero-content{text-align:left;margin-left:0;}
+  .slide-eyebrow{justify-content:flex-start;}
+  .cta-inner{text-align:left;margin-left:0;}
+  .modal-body{padding:36px 26px 32px;}
+  .what-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- LEFT PANEL -->
+<aside class="side-panel">
+  <a href="https://ecmgroups.com" class="brand-mark">go<span>.</span>ecmgroups</a>
+  <div class="panel-mid">
+    <div class="slide-counter">
+      <div class="slide-num" id="slideNum">01</div>
+      <div class="slide-total">/ 05</div>
+    </div>
+    <div class="panel-divider"></div>
+    <div class="panel-label">ECMG Creative Studios @ecmgroups</div>
+  </div>
+  <div class="panel-socials">
+    <a href="https://instagram.com/ecmgroups" title="Instagram">
+      <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.8" fill="white" stroke="none"/></svg>
+    </a>
+    <a href="https://twitter.com/ecmgroups" title="Twitter">
+      <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/channel/UCwdFswXpR-epgzg9tsOkYBw" title="YouTube">
+      <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.94A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" stroke="none"/></svg>
+    </a>
+    <a href="https://facebook.com/ecmgroups" title="Facebook">
+      <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+  </div>
+</aside>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <span class="nav-phone">+1 (718) 679-5177</span>
+  <ul class="nav-links">
+    <li><a href="https://ecmgroups.com">Home</a></li>
+    <li><a href="https://ecmgroups.com/about.html">About Us</a></li>
+    <li><a href="https://ecmgroups.com/thepodcast.html">Podcast</a></li>
+    <li><a href="http://ecmgroups.com/theblog">Blog</a></li>
+    <li><a href="http://www.ecmgroups.com/theshop">Shop</a></li>
+  </ul>
+  <button class="nav-enroll" onclick="openModal()">Enroll Now</button>
+</nav>
+
+<!-- SITE BODY -->
+<div class="site-body">
+
+<!-- ── SLIDE 01: HERO ── -->
+<section class="slide hero-slide" data-slide="01">
+  <div class="slide-bg dark"></div>
+  <div class="slide-content">
+    <div class="hero-content">
+      <div class="slide-eyebrow animate">ECMG Creative Studios</div>
+      <h1 class="hero-title animate">Digital<br><em>Creative</em><br>Training</h1>
+      <p class="hero-sub animate">The complete creative training system — built for founders, consultants, and brand strategists ready to position, present, and profit at a higher level.</p>
+      <button class="pill-btn animate" onclick="openModal()">Enroll Now <span class="pill-arrow">→</span></button>
+    </div>
+  </div>
+  <div class="urgency-strip">
+    <div class="urgency-item"><span class="urgency-dot"></span>Offer Ends Soon</div>
+    <div class="urgency-item"><span class="urgency-dot"></span>Limited Enrollment</div>
+    <div class="urgency-item"><span class="urgency-dot"></span>Total Value $8,347</div>
+  </div>
+  <div class="slide-nav">
+    <a href="#what" class="slide-nav-btn">NEXT</a>
+  </div>
+</section>
+
+<!-- ── SLIDE 02: WHAT YOU GET ── -->
+<section class="slide what-slide" id="what" data-slide="02">
+  <div class="slide-content">
+    <div class="section-hed animate">
+      <div class="section-tag">What's Inside</div>
+      <h2>Built to <span>Move You Forward</span></h2>
+    </div>
+    <div class="what-grid animate">
+      <div class="what-card">
+        <div class="what-num">01</div>
+        <h3>Training Videos</h3>
+        <p>Precision-built video modules covering brand positioning, creative strategy, and real-world execution frameworks you can deploy from day one.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-num">02</div>
+        <h3>Downloads &amp; Templates</h3>
+        <p>Professionally designed worksheets, plug-and-play templates, and reference guides — built for immediate use in your practice or client work.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-num">03</div>
+        <h3>Exclusive Bonuses</h3>
+        <p>Additional resources included with enrollment — extended training, premium tools, and high-value materials to multiply your results.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-num">04</div>
+        <h3>Lifetime Access</h3>
+        <p>Your full library. Any time. Download everything. Return to it as your business scales and your work demands a higher standard.</p>
+      </div>
+    </div>
+    <div style="position:relative;bottom:auto;left:auto;margin-top:48px;" class="slide-nav">
+      <a href="#product" class="slide-nav-btn">NEXT</a>
+      <a href="javascript:window.scrollTo(0,0)" class="slide-nav-btn">PREV</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 03: PRODUCT FEATURE ── -->
+<section class="slide product-slide" id="product" data-slide="03" style="min-height:90vh;">
+  <div class="product-inner">
+    <div class="product-img-wrap animate">
+      <div class="product-img-frame" id="productFrame">
+        <!-- REPLACE: swap this div with <img src="YOUR_IMAGE_URL" alt="Product"> -->
+        <div class="product-placeholder-msg">
+          <div style="font-size:2.5rem;opacity:0.2;margin-bottom:16px;">◻</div>
+          Product Image<br>
+          <span style="font-size:0.55rem;opacity:0.5;display:block;margin-top:6px;">[Replace with your image]</span>
+        </div>
+      </div>
+      <div class="product-corner tl"></div>
+      <div class="product-corner br"></div>
+    </div>
+    <div class="product-text animate">
+      <div class="section-tag">The System</div>
+      <h2>One Investment.<br><span>Complete Arsenal.</span></h2>
+      <p>This isn't theory. Every module, template, and bonus has been tested inside real client engagements. You're getting the distilled architecture of a multi-six-figure creative practice — packaged for immediate application.</p>
+      <div class="product-pills">
+        <span class="product-pill">Strategy</span>
+        <span class="product-pill">Positioning</span>
+        <span class="product-pill">Creative Systems</span>
+        <span class="product-pill">Brand Architecture</span>
+        <span class="product-pill">Client Frameworks</span>
+      </div>
+      <button class="pill-btn" onclick="openModal()">Claim Your Access <span class="pill-arrow">→</span></button>
+    </div>
+  </div>
+  <div class="slide-nav">
+    <a href="#value" class="slide-nav-btn">NEXT</a>
+    <a href="#what" class="slide-nav-btn">PREV</a>
+  </div>
+</section>
+
+<!-- ── SLIDE 04: VALUE STACK ── -->
+<section class="slide value-slide" id="value" data-slide="04">
+  <div class="slide-content">
+    <div>
+      <div class="section-hed animate">
+        <div class="section-tag">Your Investment</div>
+        <h2>Total Value:<br><span>$8,347</span></h2>
+      </div>
+      <div class="value-rows animate">
+        <div class="value-row"><span class="vr-name">Core Training Module Series</span><span class="vr-val">$2,997</span></div>
+        <div class="value-row"><span class="vr-name">Brand Strategy System</span><span class="vr-val">$1,800</span></div>
+        <div class="value-row"><span class="vr-name">Worksheets &amp; Template Library</span><span class="vr-val">$1,200</span></div>
+        <div class="value-row"><span class="vr-name">Creative Campaign Blueprint</span><span class="vr-val">$850</span></div>
+        <div class="value-row"><span class="vr-name">Bonus Resource Collection</span><span class="vr-val">$750</span></div>
+        <div class="value-row"><span class="vr-name">Implementation Guide</span><span class="vr-val">$450</span></div>
+        <div class="value-row"><span class="vr-name">Quick-Reference Toolkits</span><span class="vr-val">$300</span></div>
+        <div class="value-total-block">
+          <span class="vt-label">Total Real-World Value</span>
+          <span class="vt-amount">$8,347</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-cta-card animate">
+      <div class="ends-badge"><span class="urgency-dot"></span>Offer Ends Soon</div>
+      <div class="cta-card-eyebrow">Special Pricing Active</div>
+      <h3>Everything.<br>One Price.</h3>
+      <p>Training videos, downloads, templates, and all bonuses included. Use your exclusive discount code at checkout to unlock your special rate.</p>
+      <button class="pill-btn" onclick="openModal()">Get My Code &amp; Enroll <span class="pill-arrow">→</span></button>
+      <p class="cta-card-note">Digital product · All sales final &amp; non-refundable<br>Code revealed after confirming purchase terms</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 05: TESTIMONIALS ── -->
+<section class="slide testimonials-slide" id="testimonials" data-slide="05">
+  <div class="slide-content">
+    <div class="section-hed animate">
+      <div class="section-tag">Client Results</div>
+      <h2>What They're <span>Saying</span></h2>
+    </div>
+    <div class="testi-grid animate">
+      <!-- Woman 1 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=faces" alt="Renée A.">
+          </div>
+          <div>
+            <div class="testi-name">Renée A.</div>
+            <div class="testi-role">Brand Consultant, Atlanta</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+        <div class="testi-quote">This training didn't just give me skills — it gave me a system. The templates alone were worth triple what I paid. I used them on a client engagement the same week and positioned my rates 40% higher.</div>
+      </div>
+      <!-- Woman 2 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=faces" alt="Diane W.">
+          </div>
+          <div>
+            <div class="testi-name">Diane W.</div>
+            <div class="testi-role">Founder, Brooklyn</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+        <div class="testi-quote">What I appreciated most was the architecture. Every module builds on the last. It's not a collection of tips — it's a complete methodology for how a creative professional should think, charge, and operate.</div>
+      </div>
+      <!-- Man -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=faces" alt="Marcus T.">
+          </div>
+          <div>
+            <div class="testi-name">Marcus T.</div>
+            <div class="testi-role">Creative Director, NY</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+        <div class="testi-quote">ECMG doesn't give you fluff. The frameworks are precise, the delivery is professional, and the bonus materials extend everything into real, billable application. This one delivered.</div>
+      </div>
+      <!-- Woman 3 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&crop=faces" alt="Simone L.">
+          </div>
+          <div>
+            <div class="testi-name">Simone L.</div>
+            <div class="testi-role">Marketing Strategist, DC</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+        <div class="testi-quote">I've been in marketing for 12 years and still walked away with frameworks I hadn't seen before. The level of strategic depth in the videos is not what I expected — it far exceeded it.</div>
+      </div>
+      <!-- Woman 4 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=120&h=120&fit=crop&crop=faces" alt="Camille R.">
+          </div>
+          <div>
+            <div class="testi-name">Camille R.</div>
+            <div class="testi-role">Agency Owner, Miami</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+        <div class="testi-quote">The bonus resources alone would run $800+ if you had to source them independently. Getting them included was a significant addition. My team now uses the templates on every client onboarding.</div>
+      </div>
+      <!-- Woman 5 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1614644147798-f8c0fc9da7f6?w=120&h=120&fit=crop&crop=faces" alt="Natasha B.">
+          </div>
+          <div>
+            <div class="testi-name">Natasha B.</div>
+            <div class="testi-role">Creative Entrepreneur, Philly</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+        <div class="testi-quote">I was skeptical at first — I've been burned by digital products before. But the quality here is different. Professionally produced, strategically sound, and immediately actionable. Worth every dollar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOTTOM CTA ── -->
+<section class="slide cta-slide">
+  <div class="slide-bg dark"></div>
+  <div class="cta-inner">
+    <div class="slide-eyebrow" style="justify-content:flex-end;">ECMG Creative Studios</div>
+    <h2>The Offer<br><span>Ends Soon.</span></h2>
+    <p>Enrollment is limited. Your discount code and access are waiting — confirm your terms and receive everything instantly.</p>
+    <button class="pill-btn" onclick="openModal()">Lock In My Access <span class="pill-arrow">→</span></button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <a href="https://ecmgroups.com" class="brand-mark">go<span>.</span>ecmgroups</a>
+  <p class="footer-copy">© ECMG Creative Studios 2022–2029. All Rights Reserved.</p>
+  <a href="https://instagram.com/ecmgroups" class="footer-link">@ecmgroups</a>
+</footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlay(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body">
+      <div class="modal-step active" id="step1">
+        <div class="modal-eyebrow">Before You Proceed</div>
+        <h3>Confirm Your Purchase</h3>
+        <p>This is a digital product. Read and confirm the terms below before your discount code and checkout link are revealed.</p>
+        <div class="check-block">
+          <input type="checkbox" id="agreeCheck" onchange="toggleBtn()">
+          <label for="agreeCheck">I understand this is a <strong>digital product</strong> and all sales are <strong>final and non-refundable.</strong> No refunds, chargebacks, or exceptions. I am purchasing intentionally and agree to these terms.</label>
+        </div>
+        <button class="modal-pill" id="step1btn" onclick="goStep2()">I Agree — Reveal My Code →</button>
+      </div>
+      <div class="modal-step" id="step2">
+        <div class="modal-eyebrow">Your Exclusive Access</div>
+        <h3>Here's Your Code</h3>
+        <p>Copy the code below, then proceed to checkout. Apply it before completing payment to receive your special rate.</p>
+        <div class="code-box">
+          <div class="code-box-label">Your Promo Code</div>
+          <div class="code-display">DCT20</div>
+          <div class="code-hint">Copy this code · Apply at checkout · Do not share</div>
+          <div class="code-ends">⚡ Offer ends soon — act now</div>
+        </div>
+        <a href="https://ko-fi.com/summary/b6c3a324-5288-4f2f-9697-3aac672f562a" class="kofi-pill" target="_blank" rel="noopener noreferrer">Proceed to Checkout →</a>
+        <p class="modal-sub">After payment, check your email for your delivery page access link.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Slide counter
+const slideEls = document.querySelectorAll('[data-slide]');
+const slideNum = document.getElementById('slideNum');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) slideNum.textContent = e.target.dataset.slide; });
+}, {threshold:0.4});
+slideEls.forEach(s => io.observe(s));
+
+// Animate in
+const animEls = document.querySelectorAll('.animate');
+const animIO = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); animIO.unobserve(e.target); }});
+}, {threshold:0.12});
+animEls.forEach(el => animIO.observe(el));
+
+// Modal
+function openModal(){
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow='hidden';
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('step2').classList.remove('active');
+  document.getElementById('agreeCheck').checked=false;
+  document.getElementById('step1btn').classList.remove('on');
+}
+function closeModal(){ document.getElementById('modal').classList.remove('active'); document.body.style.overflow=''; }
+function handleOverlay(e){ if(e.target===document.getElementById('modal')) closeModal(); }
+function toggleBtn(){ document.getElementById('step1btn').classList.toggle('on',document.getElementById('agreeCheck').checked); }
+function goStep2(){ document.getElementById('step1').classList.remove('active'); document.getElementById('step2').classList.add('active'); }
+</script>
+</body>
+</html>
