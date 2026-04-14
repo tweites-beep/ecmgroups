@@ -661,11 +661,11 @@ footer{
 .check-block label{font-size:0.88rem;color:var(--gray-mid);line-height:1.7;cursor:pointer;}
 .check-block label strong{color:var(--white);}
 .modal-pill{
-  width:100%;font-family:var(--font-d);font-size:0.82rem;font-weight:700;
+  display:block;width:100%;font-family:var(--font-d);font-size:0.82rem;font-weight:700;
   letter-spacing:0.2em;text-transform:uppercase;
   background:var(--gold);color:var(--black);padding:16px;
   border:none;border-radius:40px;cursor:pointer;transition:all 0.3s;
-  opacity:0.3;pointer-events:none;
+  opacity:0.3;pointer-events:none;text-decoration:none;text-align:center;
 }
 .modal-pill.on{opacity:1;pointer-events:all;}
 .modal-pill.on:hover{background:#DDB96A;transform:translateY(-1px);}
@@ -696,6 +696,50 @@ footer{
 }
 .kofi-pill:hover{background:#DDB96A;transform:translateY(-1px);}
 .modal-sub{font-size:0.77rem;color:var(--gray);text-align:center;margin-top:12px;}
+
+/* ═══════════════════════════════════════════
+   INTRO ON-LOAD POPUP
+═══════════════════════════════════════════ */
+.intro-overlay{
+  display:none;position:fixed;inset:0;z-index:600;
+  background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+  padding:20px 20px 20px calc(var(--bw) + 68px);
+}
+.intro-overlay.active{display:flex;}
+.intro-modal{
+  background:#141414;border:1px solid #2A2A2A;border-top:2px solid #9d5570;
+  max-width:520px;width:100%;position:relative;
+  animation:modalIn 0.42s cubic-bezier(0.16,1,0.3,1) forwards;
+  padding:48px 46px 42px;
+}
+.intro-close{
+  position:absolute;top:18px;right:22px;
+  background:none;border:none;color:var(--gray);font-size:1.1rem;cursor:pointer;transition:color 0.2s;
+}
+.intro-close:hover{color:var(--white);}
+.intro-eyebrow{
+  font-family:var(--font-d);font-size:0.95rem;letter-spacing:0.18em;
+  text-transform:uppercase;color:#9d5570;margin-bottom:22px;line-height:1.6;
+}
+.intro-body{
+  font-size:0.9rem;color:var(--gray-mid);line-height:1.8;margin-bottom:32px;
+}
+.intro-pill{
+  width:100%;font-family:var(--font-d);font-size:0.82rem;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  background:#9d5570;color:#fff;padding:16px;
+  border:none;border-radius:40px;cursor:pointer;transition:all 0.3s;
+}
+.intro-pill:hover{background:#b56282;transform:translateY(-1px);}
+.intro-fine{
+  font-size:0.72rem;color:var(--gray);text-align:center;margin-top:10px;
+  letter-spacing:0.06em;
+}
+@media(max-width:860px){
+  .intro-overlay{padding:20px;}
+  .intro-modal{padding:36px 26px 32px;}
+}
 
 /* ═══════════════════════════════════════════
    RESPONSIVE
@@ -1248,6 +1292,17 @@ footer{
   </div>
 </div><!-- /layout -->
 
+<!-- ══ ON-LOAD POPUP ══ -->
+<div class="intro-overlay" id="introPopup">
+  <div class="intro-modal">
+    <button class="intro-close" onclick="closeIntro()">✕</button>
+    <div class="intro-eyebrow">LIMITED ACCESS — READ THIS BEFORE YOU CONTINUE</div>
+    <p class="intro-body">If your brand doesn't immediately signal authority, buyers hesitate—or worse, they choose someone else.<br><br>When you sign up now, you get this — a <strong>45-minute diagnostic</strong> that shows you exactly what's costing your brand credibility, visibility, and sales—so you can fix it fast.<br><br>PLUS immediate access to the massive offer below.</p>
+    <button class="intro-pill" onclick="closeIntro()">Just ONE SLOT available!</button>
+    <div class="intro-fine">This is not a rolling offer.</div>
+  </div>
+</div>
+
 <!-- ══ MODAL ══ -->
 <div class="modal-overlay" id="modal" onclick="handleOverlay(event)">
   <div class="modal">
@@ -1259,21 +1314,9 @@ footer{
         <p>Read and confirm the terms below before your discount code and checkout link are revealed.</p>
         <div class="check-block">
           <input type="checkbox" id="agreeCheck" onchange="toggleBtn()">
-          <label for="agreeCheck">I understand this is a <strong>digital product</strong> and all sales are <strong>final and non-refundable.</strong> No refunds, chargebacks, or exceptions. I am purchasing intentionally and agree to these terms.</label>
+          <label for="agreeCheck">This is a <strong>focused, high-touch diagnostic</strong>. Once booked, your time is reserved, and preparation begins immediately—so <strong>all sessions are final without exception.</strong><br><br>I am purchasing intentionally and agree to these terms.</label>
         </div>
-        <button class="modal-pill" id="step1btn" onclick="goStep2()">I Agree — Reveal My Code →</button>
-      </div>
-      <div class="modal-step" id="step2">
-        <div class="modal-eyebrow">Your Exclusive Access</div>
-        <h3>Here's Your Code</h3>
-        <p>Copy the code below and apply it at checkout before completing payment to receive your special rate.</p>
-        <div class="code-box">
-          <div class="code-box-label">Your Promo Code</div>
-          <div class="code-display">DCT20</div>
-          <div class="code-hint">Copy · Apply at checkout · Do not share</div>
-          <div class="code-ends">⚡ Offer ends soon — act now</div>
-        </div>
-        <a href="https://ko-fi.com/summary/b6c3a324-5288-4f2f-9697-3aac672f562a" class="kofi-pill" target="_blank" rel="noopener noreferrer">Proceed to Checkout →</a>
+        <a href="https://ko-fi.com/summary/b6c3a324-5288-4f2f-9697-3aac672f562a" class="modal-pill" id="step1btn" target="_blank" rel="noopener noreferrer">Proceed to Checkout →</a>
         <p class="modal-sub">After payment, check your email for your delivery page access link.</p>
       </div>
     </div>
@@ -1281,6 +1324,16 @@ footer{
 </div>
 
 <script>
+// Intro on-load popup
+function closeIntro(){
+  document.getElementById('introPopup').classList.remove('active');
+  document.body.style.overflow='';
+}
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('introPopup').classList.add('active');
+  document.body.style.overflow='hidden';
+});
+
 // Slide counter
 const slides = document.querySelectorAll('[data-slide]');
 const countEl = document.getElementById('slideCount');
@@ -1303,14 +1356,12 @@ function openModal(){
   document.getElementById('modal').classList.add('active');
   document.body.style.overflow='hidden';
   document.getElementById('step1').classList.add('active');
-  document.getElementById('step2').classList.remove('active');
   document.getElementById('agreeCheck').checked=false;
   document.getElementById('step1btn').classList.remove('on');
 }
 function closeModal(){ document.getElementById('modal').classList.remove('active'); document.body.style.overflow=''; }
 function handleOverlay(e){ if(e.target===document.getElementById('modal')) closeModal(); }
 function toggleBtn(){ document.getElementById('step1btn').classList.toggle('on', document.getElementById('agreeCheck').checked); }
-function goStep2(){ document.getElementById('step1').classList.remove('active'); document.getElementById('step2').classList.add('active'); }
 
 // Floating scroll arrows
 const floatDown = document.getElementById('floatDown');
