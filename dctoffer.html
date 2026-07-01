@@ -20,7 +20,105 @@ body{
   font-family:'Montserrat',sans-serif;
   font-size:16px;line-height:1.7;
   overflow-x:hidden;
+  padding-top:var(--ticker-h);
 }
+
+/* ═══════════════════════════════════════════
+   TOP TICKER (MARQUEE)
+═══════════════════════════════════════════ */
+.ticker-bar{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:var(--ticker-h);
+  background:#9d5570;
+  z-index:400;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  gap:0;
+}
+.ticker-track{
+  display:flex;
+  align-items:center;
+  gap:32px;
+  white-space:nowrap;
+  animation:tickerScroll 22s linear infinite;
+}
+.ticker-track:hover{animation-play-state:paused;}
+@keyframes tickerScroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+.ticker-text{
+  font-family:var(--font-d);
+  font-size:0.78rem;
+  font-weight:400;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:#0D0D0D;
+}
+.ticker-cta{
+  font-family:var(--font-d);
+  font-size:0.72rem;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:#0D0D0D;
+  text-decoration:none;
+  border:1px solid rgba(13,13,13,0.4);
+  padding:4px 14px;
+  border-radius:20px;
+  transition:all 0.25s;
+  flex-shrink:0;
+}
+.ticker-cta:hover{
+  background:#0D0D0D;
+  color:#9d5570;
+  border-color:#0D0D0D;
+}
+
+/* ═══════════════════════════════════════════
+   COMING SOON VIDEO SECTION
+═══════════════════════════════════════════ */
+.coming-soon-section{
+  background:#0A0A0A;
+  padding:90px 6%;
+}
+.coming-soon-section .section-hed{
+  margin-bottom:48px;
+}
+.coming-soon-video-wrap{
+  position:relative;
+  width:100%;
+  margin:0 auto;
+  border:1px solid #2A2A2A;
+  border-top:2px solid var(--gold);
+  background:#000;
+  overflow:hidden;
+  aspect-ratio:16/9;
+}
+.coming-soon-video-wrap video,
+.coming-soon-video-wrap iframe{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border:0;
+}
+.coming-soon-caption{
+  text-align:center;
+  margin-top:28px;
+  font-size:0.85rem;
+  color:var(--gray);
+  letter-spacing:0.04em;
+}
+@media(max-width:768px){
+  .coming-soon-section{padding:60px 5%;}
+}
+
 
 /* ═══════════════════════════════════════════
    SITE COLOURS
@@ -37,6 +135,7 @@ body{
   --font-d:'Oswald',sans-serif;
   --font-b:'Montserrat',sans-serif;
   --bw:160px;  /* brand panel width */
+  --ticker-h:38px;
 }
 
 /* ═══════════════════════════════════════════
@@ -44,7 +143,7 @@ body{
 ═══════════════════════════════════════════ */
 .brand-panel{
   position:fixed;
-  left:0;top:0;bottom:0;
+  left:0;top:var(--ticker-h);bottom:0;
   width:var(--bw);
   background:var(--panel-bg);
   border-right:1px solid var(--panel-border);
@@ -84,13 +183,13 @@ body{
 }
 .vertical-panel{
   position:fixed;
-  left:var(--bw);top:0;bottom:0;
+  left:var(--bw);top:var(--ticker-h);bottom:0;
   width:1px;background:var(--panel-border);
   z-index:299;
 }
 .vertical-panel-content{
   position:fixed;
-  left:var(--bw);top:0;bottom:0;
+  left:var(--bw);top:var(--ticker-h);bottom:0;
   width:48px;
   z-index:298;
   display:flex;flex-direction:column;
@@ -134,7 +233,7 @@ body{
 .header-phone{display:none;}
 .navbar-desctop{
   position:fixed;
-  top:0;left:calc(var(--bw) + 48px);right:0;
+  top:var(--ticker-h);left:calc(var(--bw) + 48px);right:0;
   height:60px;z-index:296;
   background:rgba(13,13,13,0.86);
   backdrop-filter:blur(10px);
@@ -895,13 +994,32 @@ footer{
 </head>
 <body>
 
+<!-- ══ TOP TICKER ══ -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span class="ticker-text">AI Agents, Automations Module, and Set Up is coming.</span>
+    <a href="#coming-soon-preview" class="ticker-cta">Learn More</a>
+    <span class="ticker-text" style="opacity:0.5;">&bull;</span>
+    <span class="ticker-text">AI Agents, Automations Module, and Set Up is coming.</span>
+    <a href="#coming-soon-preview" class="ticker-cta">Learn More</a>
+    <span class="ticker-text" style="opacity:0.5;">&bull;</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-text">AI Agents, Automations Module, and Set Up is coming.</span>
+    <a href="#coming-soon-preview" class="ticker-cta">Learn More</a>
+    <span class="ticker-text" style="opacity:0.5;">&bull;</span>
+    <span class="ticker-text">AI Agents, Automations Module, and Set Up is coming.</span>
+    <a href="#coming-soon-preview" class="ticker-cta">Learn More</a>
+    <span class="ticker-text" style="opacity:0.5;">&bull;</span>
+  </div>
+</div>
+
 <!-- ══ BRAND PANEL (left fixed) ══ -->
 <div class="brand-panel">
   <a href="index.html" class="brand js-target-scroll">go<span class="text-primary">.</span>ecmgroups</a>
   <div class="brand-name">Go.ecmgroups</div>
   <div class="slide-number">
     <span class="current-number text-primary">0<span class="count" id="slideCount">1</span></span>
-    <sup><span class="delimiter">/</span> 05</sup>
+    <sup><span class="delimiter">/</span> 07</sup>
   </div>
 </div>
 
@@ -977,13 +1095,14 @@ footer{
       <div class="what-card">
         <div class="what-num">01</div>
         <h3>Training Videos</h3>
-        <p>Precision-built video modules covering brand positioning, creative strategy, and real-world execution frameworks you can deploy from day one.</p>
+        <p>Precision-built video modules covering brand positioning, creative strategy, and real-world workflows to deploy from day one.</p>
+
         <div class="what-card-img"><img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=320&fit=crop&q=80" alt="Training Videos" loading="lazy"></div>
       </div>
       <div class="what-card">
         <div class="what-num">02</div>
         <h3>Downloads &amp; Templates</h3>
-        <p>Professionally designed worksheets, plug-and-play templates, and reference guides — built for immediate use in your practice or client work.</p>
+        <p>Professionally designed worksheets, plug-and-play templates, and reference guides — built to use now for your business.</p>
         <div class="what-card-img"><img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=320&fit=crop&q=80" alt="Downloads and Templates" loading="lazy"></div>
       </div>
       <div class="what-card">
@@ -1133,8 +1252,21 @@ footer{
     </div>
   </section>
 
-  <!-- ── SLIDE 05: TESTIMONIALS ── -->
-  <section class="section testi-section" data-slide="5">
+  <!-- ── COMING SOON: AI AGENTS PREVIEW ── -->
+  <section class="coming-soon-section" id="coming-soon-preview" data-slide="5">
+    <div class="section-hed js-anim">
+      <div class="section-tag">Coming Soon</div>
+      <h2>AI Agents, <span>Automations</span> &amp; Setup</h2>
+    </div>
+    <div class="coming-soon-video-wrap js-anim">
+      <iframe src="https://player.vimeo.com/video/1206187829?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1&amp;muted=0&amp;texttrack=en&amp;controls=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Intro_aiagents"></iframe>
+      <script src="https://player.vimeo.com/api/player.js"></script>
+    </div>
+    <p class="coming-soon-caption js-anim">A first look at what&#8217;s next — intelligent automation built for your business.</p>
+  </section>
+
+  <!-- ── SLIDE 06: TESTIMONIALS ── -->
+  <section class="section testi-section" data-slide="6">
     <div class="section-hed js-anim">
       <div class="section-tag">Client Results</div>
       <h2>What They're <span>Saying</span></h2>
@@ -1264,8 +1396,8 @@ footer{
     </div>
   </section>
 
-  <!-- ── BOTTOM CTA ── -->
-  <div class="cta-bottom">
+  <!-- ── SLIDE 07: OFFER ENDS SOON ── -->
+  <div class="cta-bottom" data-slide="7">
     <div class="cta-bottom-bg"></div>
     <div class="cta-bottom-content">
       <div class="hero-eyebrow" style="justify-content:flex-end;opacity:1;animation:none;">ECMG Creative Studios</div>
